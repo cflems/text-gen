@@ -27,18 +27,18 @@ const quotePattern = /"[^"]+"/g;
         for (const word of corpus.match(wordPattern)) {
             let found = false;
             for (const speechPart in lang) {
-                if (lang[speechPart].indexOf(word) != -1) {
-                    found = true;
-                    vocab_append(word, speechPart);
-                } else if (lang[speechPart].indexOf(word.toLowerCase()) != -1) {
+                if (lang[speechPart].indexOf(word.toLowerCase()) != -1) {
                     found = true;
                     vocab_append(word.toLowerCase(), speechPart);
+                } else if (lang[speechPart].indexOf(word) != -1) {
+                    found = true;
+                    vocab_append(word, speechPart);
                 }
             }
             /* Assume all non-dictionary words are proper nouns. */
             if (!found) {
                 /* [proper noun]'s becomes an adjective. */
-                if (word.indexOf('\'') != -1)
+                if (word.endsWith('\'s') || word.endsWith('s\''))
                     vocab_append(word, 'adjective');
                 else
                     vocab_append(word, 'noun');

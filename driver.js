@@ -25,10 +25,11 @@
     }
 
     function adverb_adj(s, num, i) {
-        if (Math.random() < 0.75)
-            s.push(chooseWord('adverb'));
+        let adj = '';
+        if (Math.random() < 0.25)
+            adj += chooseWord('adverb') + '-';
 
-        let adj = chooseWord('adjective');
+        adj += chooseWord('adjective');
         if (num > 2 && i < num - 1)
             adj += ',';
         if (i == num - 2)
